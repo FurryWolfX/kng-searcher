@@ -1,10 +1,10 @@
-import fs from "fs";
-import { insert } from "./curd.js";
+import fs from 'fs';
+import { insert } from './curd.js';
 
-let content = fs.readFileSync("./content/1", { encoding: "utf8" });
-content = content.replace(/(\r\n)+/g, "\n").split("\n");
+let content = fs.readFileSync('./content/1', { encoding: 'utf8' });
+content = content.replace(/(\r\n)+/g, '\n').split('\n');
 content = content.map((item) => {
-  return item.replace(/^\d+、/, "").trim();
+  return item.replace(/^\d+、/, '').trim();
 });
 
 function save(content) {
@@ -14,11 +14,11 @@ function save(content) {
     const text = item;
     insert(text)
       .then(() => {
-        console.log("progress", `${count}/${total}`);
+        console.log('progress', `${count}/${total}`);
         count++;
       })
       .catch((e) => {
-        console.log("progress skip", `${count}/${total}`);
+        console.log('progress skip', `${count}/${total}`);
         count++;
       });
   }
