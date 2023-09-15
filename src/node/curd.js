@@ -15,6 +15,13 @@ export async function queryMatch(content, size = 10) {
   });
 }
 
+function contentFilter(content) {
+  return content
+    .replace(/^\d+、/, '')
+    .replace(/\n+/, '\n')
+    .trim();
+}
+
 export async function getSimValue(content) {
   const old = await queryMatch(content, 1);
   const result = get(old.data, 'hits.hits.0._source.content') || '';
@@ -22,9 +29,10 @@ export async function getSimValue(content) {
 }
 
 export async function insert(content, v = 1) {
+  content = contentFilter(content);
   const sim = await getSimValue(content);
   if (sim >= 95) {
-    throw new Error('sim >= 95');
+    throw new Error('sim >= 95 skip');
   } else {
     return await axios.post('http://localhost:9200/index/_doc', {
       content,

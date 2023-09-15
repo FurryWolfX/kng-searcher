@@ -3,9 +3,6 @@ import { insert } from './curd.js';
 
 let content = fs.readFileSync('./content/1', { encoding: 'utf8' });
 content = content.replace(/(\r\n)+/g, '\n').split('\n');
-content = content.map((item) => {
-  return item.replace(/^\d+、/, '').trim();
-});
 
 function save(content) {
   let count = 1;
