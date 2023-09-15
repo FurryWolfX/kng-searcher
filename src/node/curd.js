@@ -40,3 +40,15 @@ export async function insert(content, v = 1) {
     });
   }
 }
+
+export async function updateById(id, content, v = 1) {
+  content = contentFilter(content);
+  return await axios.post('http://localhost:9200/index/_doc/' + id, {
+    content,
+    v,
+  });
+}
+
+export async function deleteById(id) {
+  return await axios.delete('http://localhost:9200/index/_doc/' + id);
+}
