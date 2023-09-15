@@ -29,6 +29,7 @@ if (!isLocalPage()) {
   container.style.backgroundColor = 'white';
   container.style.zIndex = '999991';
   container.style.display = 'none';
+  container.style.overflowY = 'auto';
   document.body.appendChild(container);
 
   const toggleBtn = document.createElement('div');
