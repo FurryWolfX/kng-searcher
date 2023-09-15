@@ -1,4 +1,5 @@
 {
+  "name": "kng-searcher",
   "type": "module",
   "scripts": {
     "dev": "vite",
