@@ -3,6 +3,12 @@
   "description": "KngSearch!",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": ["scripting", "webNavigation"],
+  "action": {},
+  "background": {
+    "service_worker": "service_worker.js",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "js": [
@@ -19,7 +25,8 @@
         "<all_urls>"
       ],
       "resources": [
-        "assets/*"
+        "assets/*",
+        "es/*"
       ]
     }
   ]
