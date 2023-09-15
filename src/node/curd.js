@@ -2,8 +2,10 @@ import axios from 'axios';
 import { get } from 'lodash-es';
 import { similar } from './util/sim.js';
 
+const url = 'http://localhost:9200';
+
 export async function queryMatch(content, size = 10) {
-  return await axios.post('http://localhost:9200/index/_search', {
+  return await axios.post(url + '/index/_search', {
     query: {
       match: {
         content,
@@ -34,7 +36,7 @@ export async function insert(content, v = 1) {
   if (sim >= 95) {
     throw new Error('sim >= 95 skip');
   } else {
-    return await axios.post('http://localhost:9200/index/_doc', {
+    return await axios.post(url + '/index/_doc', {
       content,
       v,
     });
@@ -43,12 +45,12 @@ export async function insert(content, v = 1) {
 
 export async function updateById(id, content, v = 1) {
   content = contentFilter(content);
-  return await axios.post('http://localhost:9200/index/_doc/' + id, {
+  return await axios.post(url + '/index/_doc/' + id, {
     content,
     v,
   });
 }
 
 export async function deleteById(id) {
-  return await axios.delete('http://localhost:9200/index/_doc/' + id);
+  return await axios.delete(url + '/index/_doc/' + id);
 }
