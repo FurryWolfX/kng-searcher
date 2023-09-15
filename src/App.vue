@@ -115,6 +115,7 @@ async function onInput() {
 
     .flex-box-left {
       flex: 1;
+      font-size: 12px;
     }
   }
 
