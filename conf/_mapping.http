@@ -1,0 +1,17 @@
+PUT http://localhost:9200/index/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "content": {
+      "type": "text",
+      "fields": {
+        "keyword": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
+
+###
