@@ -1,4 +1,4 @@
-(function () {
+window.addEventListener('load', () => {
   function isLocalPage() {
     return window.location.host.includes('localhost') || window.location.host.includes('127.0.0.1');
   }
@@ -61,4 +61,4 @@
     addScript(chrome.runtime.getURL('/assets/index.js'), true);
     addStyle(chrome.runtime.getURL('/assets/index.css'));
   }
-})();
+});
