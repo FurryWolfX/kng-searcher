@@ -1,15 +1,18 @@
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { insert } from './curd.js';
 
-let content = fs.readFileSync('./content/1', { encoding: 'utf8' });
-content = content.replace(/(\r\n)+/g, '\n').split('\n');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+let content = fs.readFileSync(path.resolve(__dirname, 'content/1'), { encoding: 'utf8' });
+content = content.split('---');
 
 function save(content) {
   let count = 1;
   let total = content.length;
   for (let item of content) {
-    const text = item;
-    insert(text)
+    insert(item)
       .then(() => {
         console.log('progress', `${count}/${total}`);
         count++;
@@ -21,5 +24,4 @@ function save(content) {
   }
 }
 
-console.log(content);
-// save(content);
+save(content);

@@ -29,7 +29,7 @@
           type="textarea"
           placeholder="自动调整尺寸"
           :autosize="{
-            minRows: 3,
+            minRows: 10,
           }"
         />
       </div>

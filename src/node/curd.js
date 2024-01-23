@@ -19,8 +19,8 @@ export async function queryMatch(content, size = 10) {
 
 function contentFilter(content) {
   return content
-    .replace(/^\d+、/, '')
-    .replace(/\n+/, '\n')
+    .replace(/(\r\n)+/g, '\n')
+    .replace(/\n{2,}/g, '\n')
     .trim();
 }
 

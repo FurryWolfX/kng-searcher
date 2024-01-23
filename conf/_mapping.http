@@ -1,3 +1,5 @@
+# 设置content为分词索引
+
 PUT http://localhost:9200/index/_mapping
 Content-Type: application/json
 
