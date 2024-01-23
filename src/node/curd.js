@@ -20,7 +20,7 @@ export async function queryMatch(content, size = 10) {
 function contentFilter(content) {
   return content
     .replace(/(\r\n)+/g, '\n')
-    .replace(/\n{2,}/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
 
