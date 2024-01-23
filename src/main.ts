@@ -1,5 +1,8 @@
 import { createApp } from 'vue';
-import './assets/app.scss';
+import ElementPlus from 'element-plus';
 import App from './App.vue';
 
-createApp(App).mount('#kng-search');
+const app = createApp(App);
+
+app.use(ElementPlus);
+app.mount('#kng-search');

@@ -1,49 +1,38 @@
 <template>
   <div class="kng-search">
     <div class="flex-box">
-      <n-input class="flex-box-left" v-model:value="keyword" @input="onInput" />
-      <n-button class="flex-box-right" @click="openAdd">Add</n-button>
+      <el-input class="flex-box-left" v-model="keyword" @input="onInput" />
+      <el-button class="flex-box-right" @click="openAdd">Add</el-button>
     </div>
     <div>
-      <n-list>
-        <n-list-item v-for="row in dataList" :key="row._id">
-          <div class="flex-box">
-            <div class="flex-box-left multi">{{ row._source.content }}</div>
-            <n-button class="flex-box-right" @click="openEdit(row)">Edit</n-button>
-            <n-popconfirm @positive-click="del(row._id)">
-              Delete?
-              <template #trigger>
-                <n-button class="flex-box-right">Del</n-button>
-              </template>
-            </n-popconfirm>
-          </div>
-        </n-list-item>
-      </n-list>
+      <div v-for="row in dataList" :key="row._id">
+        <el-divider />
+        <div class="flex-box">
+          <div class="flex-box-left multi">{{ row._source.content }}</div>
+          <el-button class="flex-box-right" @click="openEdit(row)">Edit</el-button>
+          <el-popconfirm title="Delete?" @confirm="del(row._id)">
+            <template #reference>
+              <el-button class="flex-box-right">Del</el-button>
+            </template>
+          </el-popconfirm>
+        </div>
+      </div>
     </div>
 
-    <n-modal v-model:show="showModal" preset="dialog">
+    <el-dialog v-model="showModal">
       <div>
-        <n-input
-          v-model:value="newContent"
-          class="flex-box-left"
-          type="textarea"
-          placeholder="自动调整尺寸"
-          :autosize="{
-            minRows: 10,
-          }"
-        />
+        <el-input type="textarea" v-model="newContent" :rows="10"></el-input>
       </div>
-      <template #action>
-        <n-button class="flex-box-right" @click="doAddOrUpdate">Add/Update</n-button>
-        <n-button class="flex-box-right" @click="close">Close</n-button>
+      <template #footer>
+        <el-button type="primary" @click="doAddOrUpdate">Add/Update</el-button>
+        <el-button @click="close">Close</el-button>
       </template>
-    </n-modal>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { NButton, NInput, NList, NListItem, NModal, NPopconfirm } from 'naive-ui';
 // @ts-ignore
 import { deleteById, insert, queryMatch, updateById } from './node/curd.js';
 
@@ -107,18 +96,19 @@ async function onInput() {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+@import 'element-plus/dist/index.css';
 .kng-search {
+  @import './assets/app.scss';
+  padding: 10px;
   .flex-box {
     display: flex;
-    padding-left: 12px;
-
     .flex-box-left {
       flex: 1;
       font-size: 12px;
+      margin-right: 10px;
     }
   }
-
   .multi {
     white-space: pre-line;
   }
