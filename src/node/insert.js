@@ -5,7 +5,7 @@ import { insert } from './curd.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-let content = fs.readFileSync(path.resolve(__dirname, 'content/1'), { encoding: 'utf8' });
+let content = fs.readFileSync(path.resolve(__dirname, 'content/2.txt'), { encoding: 'utf8' });
 content = content.split('---');
 
 function save(content) {

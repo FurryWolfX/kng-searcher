@@ -2,3 +2,4 @@
 /dist/
 /.idea/
 /chrome/assets/
+/src/node/content/**
