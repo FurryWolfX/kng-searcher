@@ -17,10 +17,12 @@ export async function queryMatch(content, size = 10) {
   });
 }
 
-function contentFilter(content) {
+export function contentFilter(content) {
   return content
     .replace(/(\r\n)+/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .replace(/^\d+\./g, '')
     .trim();
 }
 
@@ -30,15 +32,15 @@ export async function getSimValue(content) {
   return similar(content, result);
 }
 
-export async function insert(content, v = 1) {
-  content = contentFilter(content);
+export async function insert(content, tag) {
+  content = `[${tag}] ${contentFilter(content)}`;
   const sim = await getSimValue(content);
   if (sim >= 95) {
     throw new Error('sim >= 95 skip');
   } else {
     return await axios.post(url + '/index/_doc', {
       content,
-      v,
+      v: 1,
     });
   }
 }
