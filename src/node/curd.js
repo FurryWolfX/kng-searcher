@@ -33,7 +33,11 @@ export async function getSimValue(content) {
 }
 
 export async function insert(content, tag) {
-  content = `[${tag}] ${contentFilter(content)}`;
+  if (tag) {
+    content = `[${tag}] ${contentFilter(content)}`;
+  } else {
+    content = contentFilter(content);
+  }
   const sim = await getSimValue(content);
   if (sim >= 95) {
     throw new Error('sim >= 95 skip');
